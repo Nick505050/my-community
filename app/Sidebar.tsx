@@ -8,23 +8,25 @@ const Sidebar: React.FC = () => {
       <h2 className="text-lg font-semibold mb-4">Communities</h2>
       <ul className="space-y-2">
         <li>
-          <Link href="/communities/general">
-            <a className="hover:text-[var(--accent-hover)]">General</a>
+          <Link href="/communities/general" className="hover:text-[var(--accent-hover)]">
+            General
           </Link>
         </li>
         <li>
-          <Link href="/communities/technology">
-            <a className="hover:text-[var(--accent-hover)]">Technology</a>
+          <Link
+            href="/communities/technology"
+            className="hover:text-[var(--accent-hover)]">
+            Technology
           </Link>
         </li>
         <li>
-          <Link href="/communities/gaming">
-            <a className="hover:text-[var(--accent-hover)]">Gaming</a>
+          <Link href="/communities/gaming" className="hover:text-[var(--accent-hover)]">
+            Gaming
           </Link>
         </li>
         <li>
-          <Link href="/communities/arts">
-            <a className="hover:text-[var(--accent-hover)]">Arts</a>
+          <Link href="/communities/arts" className="hover:text-[var(--accent-hover)]">
+            Arts
           </Link>
         </li>
       </ul>

@@ -6,18 +6,18 @@ const Navbar: React.FC = () => {
   return (
     <header className="bg-[var(--background)] shadow px-4 py-3 flex justify-between items-center">
       <div className="flex items-center gap-4">
-        <Link href="/">
-          <a className="text-2xl font-bold">Community</a>
+        <Link href="/" className="text-2xl font-bold">
+          Community
         </Link>
         <nav className="hidden md:flex space-x-4">
-          <Link href="/feed">
-            <a className="hover:text-[var(--accent-hover)]">Feed</a>
+          <Link href="/feed" className="hover:text-[var(--accent-hover)]">
+            Feed
           </Link>
-          <Link href="/communities">
-            <a className="hover:text-[var(--accent-hover)]">Communities</a>
+          <Link href="/communities" className="hover:text-[var(--accent-hover)]">
+            Communities
           </Link>
-          <Link href="/explore">
-            <a className="hover:text-[var(--accent-hover)]">Explore</a>
+          <Link href="/explore" className="hover:text-[var(--accent-hover)]">
+            Explore
           </Link>
         </nav>
       </div>
@@ -37,13 +37,13 @@ const Navbar: React.FC = () => {
           <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500" />
         </button>
         <Link href="/profile">
-          <a>
-            <img 
-              src="/avatar-placeholder.png" 
-              alt="User Avatar" 
-              className="w-8 h-8 rounded-full border"
-            />
-          </a>
+
+          <img 
+            src="/avatar-placeholder.png" 
+            alt="User Avatar" 
+            className="w-8 h-8 rounded-full border"
+          />
+
         </Link>
       </div>
     </header>

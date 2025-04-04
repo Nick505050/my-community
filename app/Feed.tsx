@@ -34,8 +34,10 @@ const Feed: React.FC = () => {
         <div className="space-y-4">
           {posts.map((post) => (
             <div key={post.id} className="bg-[var(--secondary)] p-4 rounded shadow">
-              <Link href={`/post/${post.id}`}>
-                <a className="text-2xl font-semibold hover:text-[var(--accent-hover)]">{post.title}</a>
+              <Link
+                href={`/post/${post.id}`}
+                className="text-2xl font-semibold hover:text-[var(--accent-hover)]">
+                {post.title}
               </Link>
               <p className="mt-2 text-sm">{post.content}</p>
               <div className="mt-4 text-xs text-gray-500">
