@@ -5,7 +5,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import a modern, clean sans-serif font */
 
 * {
   box-sizing: border-box;
@@ -22,13 +21,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Define a custom colour palette */
+/* Custom colour variables */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --accent: #1d4ed8;       /* Primary blue for accents */
-  --accent-hover: #1e40af;  /* A slightly darker blue for hover states */
-  --secondary: #f3f4f6;     /* Light grey for backgrounds/panels */
+  --accent: #1d4ed8;
+  --accent-hover: #1e40af;
+  --secondary: #f3f4f6;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,14 +48,14 @@ body {
 a {
   color: var(--accent);
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  transition: colour 0.2s ease-in-out;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
-/* Custom scrollbar for posts feed */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }

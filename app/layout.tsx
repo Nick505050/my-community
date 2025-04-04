@@ -1,22 +1,25 @@
+// app/layout.tsx
 import './globals.css'
 import { ReactNode } from 'react'
 import { SupabaseProvider } from '@/context/SupabaseProvider'
-import Navbar from '@/components/Navbar'
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 
-export const metadata = {
-  title: 'Community Platform',
-  description: 'Stay connected anytime.',
-}
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <html lang="en">
-      <body className="bg-gray-50">
-        <SupabaseProvider>
-          <Navbar />
-          <main>{children}</main>
-        </SupabaseProvider>
-      </body>
-    </html>
-  )
-}
+    <SupabaseProvider>
+      <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+        <Navbar />
+        <div className="flex flex-1">
+          {/* Optional sidebar for community navigation */}
+          <Sidebar />
+          <main className="flex-1 p-4">
+            {children}
+          </main>
+        </div>
+      </div>
+    </SupabaseProvider>
+  );
+};
+
+export default Layout;
