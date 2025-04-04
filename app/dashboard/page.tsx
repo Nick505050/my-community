@@ -1,14 +1,25 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { FaBars, FaUserCircle, FaChartLine, FaCog } from 'react-icons/fa';
+import { FaBars, FaUserCircle } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [postContent, setPostContent] = useState('');
+  const [posts, setPosts] = useState<string[]>([]);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (postContent.trim() === '') return;
+    // Debug: log the post content to the console
+    console.log("Posting:", postContent);
+    setPosts((prevPosts) => [postContent, ...prevPosts]);
+    setPostContent('');
+  };
 
   return (
     <>
@@ -29,20 +40,16 @@ const Dashboard = () => {
             <ul>
               <li>
                 <Link href="/dashboard" className="flex items-center p-4 hover:bg-gray-200">
-                  <FaChartLine className="text-lg" />
+                  <span className="text-lg">Home</span>
                   {sidebarOpen && <span className="ml-2">Dashboard</span>}
                 </Link>
               </li>
               <li>
                 <Link href="/profile" className="flex items-center p-4 hover:bg-gray-200">
-                  <FaUserCircle className="text-lg" />
+                  <span className="text-lg">
+                    <FaUserCircle />
+                  </span>
                   {sidebarOpen && <span className="ml-2">Profile</span>}
-                </Link>
-              </li>
-              <li>
-                <Link href="/settings" className="flex items-center p-4 hover:bg-gray-200">
-                  <FaCog className="text-lg" />
-                  {sidebarOpen && <span className="ml-2">Settings</span>}
                 </Link>
               </li>
             </ul>
@@ -52,7 +59,7 @@ const Dashboard = () => {
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
           <header className="bg-white shadow p-4 flex justify-between items-center">
-            <h1 className="text-2xl font-semibold">Welcome Back, User!</h1>
+            <h1 className="text-2xl font-semibold">Dashboard</h1>
             <div className="flex items-center space-x-4">
               <input 
                 type="text" 
@@ -66,77 +73,40 @@ const Dashboard = () => {
           </header>
 
           <main className="p-6 overflow-auto">
-            {/* Dashboard Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-white p-4 rounded-lg shadow">
-                <div className="text-sm text-gray-500">Total Sales</div>
-                <div className="mt-2 text-2xl font-bold">£25,000</div>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow">
-                <div className="text-sm text-gray-500">New Users</div>
-                <div className="mt-2 text-2xl font-bold">1,200</div>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow">
-                <div className="text-sm text-gray-500">Orders</div>
-                <div className="mt-2 text-2xl font-bold">320</div>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow">
-                <div className="text-sm text-gray-500">Active Subscriptions</div>
-                <div className="mt-2 text-2xl font-bold">850</div>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow">
-                <div className="text-sm text-gray-500">Revenue</div>
-                <div className="mt-2 text-2xl font-bold">£75,000</div>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow">
-                <div className="text-sm text-gray-500">Support Tickets</div>
-                <div className="mt-2 text-2xl font-bold">15</div>
-              </div>
-            </div>
+            {/* Posting Functionality */}
+            <section className="mb-8">
+              <h2 className="text-xl font-semibold mb-4">Create a New Post</h2>
+              <form onSubmit={handleSubmit}>
+                <textarea
+                  value={postContent}
+                  onChange={(e) => setPostContent(e.target.value)}
+                  placeholder="What's on your mind?"
+                  className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  rows={4}
+                ></textarea>
+                <button 
+                  type="submit" 
+                  className="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                >
+                  Post
+                </button>
+              </form>
+            </section>
 
-            {/* Recent Activity Table */}
-            <section className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-              <div className="bg-white rounded-lg shadow overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activity</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap">User John Doe registered</td>
-                      <td className="px-6 py-4 whitespace-nowrap">2025-04-01</td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          Completed
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap">Order #1234 placed</td>
-                      <td className="px-6 py-4 whitespace-nowrap">2025-03-30</td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                          Pending
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap">User Jane Smith upgraded subscription</td>
-                      <td className="px-6 py-4 whitespace-nowrap">2025-03-28</td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                          In Progress
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+            {/* List of Posts */}
+            <section>
+              <h2 className="text-xl font-semibold mb-4">Recent Posts</h2>
+              {posts.length === 0 ? (
+                <p className="text-gray-500">No posts yet. Start posting!</p>
+              ) : (
+                <ul className="space-y-4">
+                  {posts.map((post, index) => (
+                    <li key={index} className="bg-white p-4 rounded-lg shadow">
+                      <p>{post}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </section>
           </main>
         </div>
